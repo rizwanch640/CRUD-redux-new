@@ -1,7 +1,10 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const endPoint = "http://localhost:3000";
+const endPoint = "http://localhost:8000";
+//form start json server
+//npx json-server --watch db.json --port 8000
+
 
 //fetch itms
 export const fetchItems = createAsyncThunk("items/fetchItems", async () => {

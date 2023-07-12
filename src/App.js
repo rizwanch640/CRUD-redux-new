@@ -33,51 +33,58 @@ const ItemList = () => {
 
   return (
     <>
-      <div className="container my-5 ">
+      <div className="container my-5 bg-light">
         <h1 className="text-center mb-5">Todo List</h1>
-        <form onSubmit={handleSubmit} className="mb-5">
-          <div className="form-group">
-            <label htmlFor="title"> <h3>Title</h3> </label>
-            <input
-              type="text"
-              id="title"
-              title="title"
-              required
-              className="form-control mb-3"
-              value={todo.title}
-              onChange={(event) =>
-                setTodo({ ...todo, title: event.target.value })
-              }
-            />
+        <div className="card mb-5">
+          <div className="card-body">
+            <form onSubmit={handleSubmit}>
+              <div className="mb-3">
+                <label htmlFor="title" className="form-label">
+                  <h3>Title</h3>
+                </label>
+                <input
+                  type="text"
+                  id="title"
+                  title="title"
+                  required
+                  className="form-control"
+                  value={todo.title}
+                  onChange={(event) =>
+                    setTodo({ ...todo, title: event.target.value })
+                  }
+                />
+              </div>
+              <div className="d-flex justify-content-center">
+                <button className="btn btn-primary me-2" type="submit">
+                  {todo.id ? "Update" : "Add"}
+                </button>
+                <button
+                  className="btn btn-secondary"
+                  type="reset"
+                  onClick={() => setTodo({ id: "", title: "" })}
+                >
+                  Reset
+                </button>
+              </div>
+            </form>
           </div>
-          <button className="btn btn-primary mr-2 me-2" type="submit">
-            {todo.id ? "Update" : "Add"}
-          </button>
-          <button
-            className="btn btn-secondary"
-            type="reset"
-            onClick={() => setTodo({ id: "", title: "" })}
-          >
-            Reset
-          </button>
-        </form>
+        </div>
         {loading && <p>Loading...</p>}
         {error && <p>Error: {error}</p>}
-        <table className="table table-striped w-70 ">
+        <table className="table table-striped w-100">
           <thead>
             <tr>
               <th>Todo</th>
-              <th className="text-end" >Action</th>
+              <th className="text-end">Action</th>
             </tr>
           </thead>
           <tbody>
             {items.map((item) => (
               <tr key={item.id}>
                 <td>{item.title}</td>
-
-                <td className="text-end" >
+                <td className="text-end">
                   <button
-                    className="btn btn-sm btn-outline-primary mr-2 me-2 "
+                    className="btn btn-sm btn-outline-primary me-2"
                     onClick={() => handleEdit(item)}
                   >
                     Edit
